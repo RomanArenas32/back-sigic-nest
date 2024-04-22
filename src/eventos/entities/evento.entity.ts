@@ -39,7 +39,6 @@ export class Evento {
 
     @Column({ type: String, nullable: false })
     nivel_conflictividad: string;
-
 }
 
 

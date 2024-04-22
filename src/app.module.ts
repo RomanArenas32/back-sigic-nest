@@ -9,7 +9,7 @@ import { EventosModule } from './eventos/eventos.module';
     "port": 3306,
     "username": "root",
     "password": "",
-    "database": "eventos_2",
+    "database": "sigic",
     "entities": ["dist/**/*.entity{.ts,.js}"],
     "synchronize": true
   }),
