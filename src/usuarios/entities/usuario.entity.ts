@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Evento {
+export class Usuario {
 
     @PrimaryGeneratedColumn()
     id?: number;
@@ -12,7 +12,7 @@ export class Evento {
     @Column({ type: String, nullable: false, length: 50 })
     apellido: string;
 
-    @Column({ type: Number, nullable: false, length: 500 })
+    @Column({ type: Number, nullable: false,  /*length: 500*/ })
     dni: number;
 
     @Column({ type: String, nullable: false, length: 500 })
