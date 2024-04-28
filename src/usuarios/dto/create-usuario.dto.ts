@@ -1,17 +1,19 @@
-import { IsNumber, IsNotEmpty, IsString, IsBoolean } from "class-validator";
+import { IsNumber, IsNotEmpty, IsString, IsBoolean, IsPositive, IsOptional } from "class-validator";
 
 
 export class CreateUsuarioDto {
     @IsNumber()
+    @IsPositive()
+    @IsOptional()
     id?: number;
 
     @IsNotEmpty()
     @IsString()
-    nombre_usuario!: string;
+    nombre!: string;
 
     @IsNotEmpty()
     @IsString()
-    apellido_usuario!: string;
+    apellido!: string;
 
     @IsString()
     @IsNotEmpty()
@@ -22,5 +24,6 @@ export class CreateUsuarioDto {
     delegacion!: string;
 
     @IsBoolean()
+    @IsOptional()
     estado?: boolean;
 }
