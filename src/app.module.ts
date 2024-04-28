@@ -22,6 +22,8 @@ import { NotificacionesModule } from './notificaciones/notificaciones.module';
 import { Notificaciones2Module } from './notificaciones2/notificaciones2.module';
 import { EventosNovedadesModule } from './eventos-novedades/eventos-novedades.module';
 import { EventosPartidoAnalisisModule } from './eventos-partido-analisis/eventos-partido-analisis.module';
+import { Usuario } from './usuarios/entities/usuario.entity';
+import { UsuariosModule } from './usuarios/usuarios.module';
 
 @Module({
   imports: [EventosModule, TypeOrmModule.forRoot({
@@ -31,9 +33,9 @@ import { EventosPartidoAnalisisModule } from './eventos-partido-analisis/eventos
     "username": "root",
     "password": "",
     "database": "sigic",
-    "entities": ["dist/**/*.entity{.ts,.js}"],
+    "entities": [Usuario], //["dist/**/*.entity{.ts,.js}"],
     "synchronize": true
-  }), CategoriaDelegacionModule, CategoriaEventosModule, CategoriaJurisdiccionModule, CategoriaLugarModule, CategoriaOrganizacionesModule, CategoriaPersonasModule, CategoriaSubtipoEventoModule, DatosAmpliacionesModule, DatosDesarrolloModule, DatosFuncionarioModule, DatosLugarModule, DatosNovedadesModule, DatosOrganizacionesModule, DatosPersonasModule, EscuelasModule, EventosEventosModule, FuncionariosModule, NotificacionesModule, Notificaciones2Module, EventosNovedadesModule, EventosPartidoAnalisisModule,
+  }),UsuariosModule,  CategoriaDelegacionModule, CategoriaEventosModule, CategoriaJurisdiccionModule, CategoriaLugarModule, CategoriaOrganizacionesModule, CategoriaPersonasModule, CategoriaSubtipoEventoModule, DatosAmpliacionesModule, DatosDesarrolloModule, DatosFuncionarioModule, DatosLugarModule, DatosNovedadesModule, DatosOrganizacionesModule, DatosPersonasModule, EscuelasModule, EventosEventosModule, FuncionariosModule, NotificacionesModule, Notificaciones2Module, EventosNovedadesModule, EventosPartidoAnalisisModule,
 ],
   controllers: [],
   providers: [],
