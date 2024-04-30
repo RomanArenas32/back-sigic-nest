@@ -11,14 +11,13 @@ export class UsuariosService {
   ) {}
 
   async createUser(userData: CreateUsuarioDto) {
-    
-    const existeUsuario : CreateUsuarioDto = await this.findUsuario(userData.legajo);
-
+    const existeUsuario : CreateUsuarioDto = await this.findUsuarioByLegajo(userData.legajo);
         if(existeUsuario){
             throw new ConflictException("El usuario ya existe");
         }
-
-    return await this.usuarioRepository.save(userData);
+        const nuevoUsuario = await this.usuarioRepository.save(userData);
+        const mensaje = "Usuario creado correctamente";
+        return { usuario: nuevoUsuario, mensaje };
   }
 
   async findUsuarioByLegajo(legajo: string) {
