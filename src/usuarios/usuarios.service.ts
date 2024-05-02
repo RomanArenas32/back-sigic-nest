@@ -12,7 +12,7 @@ export class UsuariosService {
 
   async createUser(userData: CreateUsuarioDto) {
     
-    const existeUsuario : CreateUsuarioDto = await this.findUsuario(userData.legajo);
+    const existeUsuario : CreateUsuarioDto = await this.findUsuarioByLegajo(userData.legajo);
 
         if(existeUsuario){
             throw new ConflictException("El usuario ya existe");
@@ -25,5 +25,9 @@ export class UsuariosService {
     return await this.usuarioRepository.findOne({
       where: { legajo },
     });
+  }
+
+  async getUsuarios(){
+    return this.usuarioRepository.find();
   }
 }

@@ -15,4 +15,8 @@ export class UsuariosController {
   getUserByLegajo(@Param('legajo') legajo: string) {
     return this.UsuariosService.findUsuarioByLegajo(legajo);
   }
+  @Get()
+  getUsuarios() {
+    return this.UsuariosService.getUsuarios();
+  }
 }
