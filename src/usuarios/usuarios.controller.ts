@@ -8,11 +8,15 @@ export class UsuariosController {
 
   @Post()
   createUser(@Body() usuario: CreateUsuarioDto) {
-
     return this.UsuariosService.createUser(usuario);
   }
   @Get('/:legajo')
   getUserByLegajo(@Param('legajo') legajo: string) {
     return this.UsuariosService.findUsuarioByLegajo(legajo);
+  }
+
+  @Get()
+  getUsuariosActivos() {
+    return this.UsuariosService.getUsuariosActivos();
   }
 }
