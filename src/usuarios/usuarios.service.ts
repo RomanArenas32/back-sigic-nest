@@ -29,6 +29,8 @@ export class UsuariosService {
   }
   //Obtener  todos los usuarios activos
   async getUsuariosActivos() {
-    return await this.usuarioRepository.find();
+    return await this.usuarioRepository.find({
+      where: {estado: true}
+    });
   }
 }
