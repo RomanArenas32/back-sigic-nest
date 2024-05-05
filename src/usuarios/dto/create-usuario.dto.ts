@@ -19,6 +19,18 @@ export class CreateUsuarioDto {
     @IsNotEmpty()
     legajo!: string;
 
+    @IsString()
+    @IsNotEmpty()
+    rol!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    usuario!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    password!: string;
+
     @IsNotEmpty()
     @IsString()
     delegacion!: string;

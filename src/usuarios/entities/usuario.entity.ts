@@ -52,6 +52,12 @@ export class Usuario {
     @Column({ type: "enum", enum: DELEGACIONES, nullable: false })
     delegacion: string;
 
+    @Column({ type: String, nullable: false})
+    usuario: string;
+
+    @Column({ type: String, nullable: false })
+    password: string;
+
     @Column({ type: 'enum', enum: ROL, nullable: false, default: ROL.USER_ROLE })
     rol: string;
 

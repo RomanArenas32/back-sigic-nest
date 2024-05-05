@@ -25,6 +25,7 @@ import { EventosPartidoAnalisisModule } from './eventos-partido-analisis/eventos
 import { Usuario } from './usuarios/entities/usuario.entity';
 import { UsuariosModule } from './usuarios/usuarios.module';
 
+
 @Module({
   imports: [EventosModule, TypeOrmModule.forRoot({
     "type": "mysql",
@@ -35,7 +36,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
     "database": "sigic",
     "entities": [Usuario], //["dist/**/*.entity{.ts,.js}"],
     "synchronize": true
-  }),UsuariosModule,  CategoriaDelegacionModule, CategoriaEventosModule, CategoriaJurisdiccionModule, CategoriaLugarModule, CategoriaOrganizacionesModule, CategoriaPersonasModule, CategoriaSubtipoEventoModule, DatosAmpliacionesModule, DatosDesarrolloModule, DatosFuncionarioModule, DatosLugarModule, DatosNovedadesModule, DatosOrganizacionesModule, DatosPersonasModule, EscuelasModule, EventosEventosModule, FuncionariosModule, NotificacionesModule, Notificaciones2Module, EventosNovedadesModule, EventosPartidoAnalisisModule,
+  }),UsuariosModule,  CategoriaDelegacionModule, CategoriaEventosModule, CategoriaJurisdiccionModule, CategoriaLugarModule, CategoriaOrganizacionesModule, CategoriaPersonasModule, CategoriaSubtipoEventoModule, DatosAmpliacionesModule, DatosDesarrolloModule, DatosFuncionarioModule, DatosLugarModule, DatosNovedadesModule, DatosOrganizacionesModule, DatosPersonasModule, EscuelasModule, EventosEventosModule, FuncionariosModule, NotificacionesModule, Notificaciones2Module, EventosNovedadesModule, EventosPartidoAnalisisModule, 
 ],
   controllers: [],
   providers: [],
