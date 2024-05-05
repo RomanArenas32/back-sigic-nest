@@ -1,4 +1,4 @@
-import { IsNumber, IsNotEmpty, IsString, IsBoolean, IsPositive, IsOptional } from "class-validator";
+import { IsNumber, IsNotEmpty, IsString, IsBoolean, IsPositive, IsOptional, MinLength } from "class-validator";
 
 
 export class CreateUsuarioDto {
@@ -22,6 +22,19 @@ export class CreateUsuarioDto {
     @IsNotEmpty()
     @IsString()
     delegacion!: string;
+
+    @IsNotEmpty()
+    @IsString()
+    rol!: string;
+
+    @IsNotEmpty()
+    @IsString()
+    usuario!: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @MinLength(6, { message: 'La contraseña debe tener al menos 6 caracteres' })
+    password!: string;
 
     @IsBoolean()
     @IsOptional()
