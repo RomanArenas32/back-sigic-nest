@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import { UpdateUsuarioDto } from './dto/update-usuario-dto';
 
 @Controller('api/v1/usuarios')
 export class UsuariosController {
@@ -18,5 +19,14 @@ export class UsuariosController {
   @Get()
   getUsuariosActivos() {
     return this.UsuariosService.getUsuariosActivos();
+  }
+  @Delete('/deleted')
+  getUsuariosInactivos() {
+    return this.UsuariosService.getUsuariosInactivos();
+  }
+
+  @Patch()
+  updateUser(@Body() usuario: UpdateUsuarioDto){
+    return this.UsuariosService.updateUser(usuario);
   }
 }

@@ -3,6 +3,7 @@ import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Usuario } from './entities/usuario.entity';
+import { UpdateUsuarioDto } from './dto/update-usuario-dto';
 
 @Injectable()
 export class UsuariosService {
@@ -30,7 +31,28 @@ export class UsuariosService {
   //Obtener  todos los usuarios activos
   async getUsuariosActivos() {
     return await this.usuarioRepository.find({
-      where: {estado: true}
+      where: { estado: true },
     });
+  }
+  //obtener usuarios inactivos
+  async getUsuariosInactivos(){
+    console.log("first")
+    return await this.usuarioRepository.find({
+      where: {estado: false}
+    })
+  }
+
+  //actualizar  usuario
+  async updateUser(usuario: UpdateUsuarioDto) {
+    const existeUsuario: UpdateUsuarioDto = await this.findUsuarioByLegajo(
+      usuario.legajo,
+    );
+    if (!existeUsuario) {
+      throw new ConflictException('El usuario no existe');
+    }
+    await this.usuarioRepository.update(
+      { legajo: usuario.legajo }, 
+      { ...usuario }, 
+    );
   }
 }
