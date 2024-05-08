@@ -3,32 +3,32 @@ import { DatosOrganizacionesService } from './datos-organizaciones.service';
 import { CreateDatosOrganizacioneDto } from './dto/create-datos-organizacione.dto';
 import { UpdateDatosOrganizacioneDto } from './dto/update-datos-organizacione.dto';
 
-@Controller('datos-organizaciones')
+@Controller('api/v1/organizaciones')
 export class DatosOrganizacionesController {
   constructor(private readonly datosOrganizacionesService: DatosOrganizacionesService) {}
 
   @Post()
-  create(@Body() createDatosOrganizacioneDto: CreateDatosOrganizacioneDto) {
-    return this.datosOrganizacionesService.create(createDatosOrganizacioneDto);
+  createOrganizacion(@Body() createDatosOrganizacioneDto: CreateDatosOrganizacioneDto) {
+    return this.datosOrganizacionesService.createOrganizacion(createDatosOrganizacioneDto);
   }
 
   @Get()
-  findAll() {
-    return this.datosOrganizacionesService.findAll();
+  findAllOrganizaciones() {
+    return this.datosOrganizacionesService.findAllOrganizaciones();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.datosOrganizacionesService.findOne(+id);
+  @Get('/:id')
+  findOrganizacionById(@Param('id') id: number) {
+    return this.datosOrganizacionesService.findOrganizacionById(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDatosOrganizacioneDto: UpdateDatosOrganizacioneDto) {
-    return this.datosOrganizacionesService.update(+id, updateDatosOrganizacioneDto);
+  @Patch('/:id')
+  updateOrganizacion(@Param('id') id: number, @Body() updateDatosOrganizacioneDto: UpdateDatosOrganizacioneDto) {
+    return this.datosOrganizacionesService.updateOrganizacion(id, updateDatosOrganizacioneDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.datosOrganizacionesService.remove(+id);
+  @Delete('/:id')
+  removeOrganizacion(@Param('id') id: number) {
+    return this.datosOrganizacionesService.removeOrganizacion(id);
   }
 }
