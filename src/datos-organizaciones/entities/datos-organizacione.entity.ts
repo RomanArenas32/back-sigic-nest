@@ -1,20 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class DatosOrganizaciones {
+export class Organizaciones {
+
   @PrimaryGeneratedColumn()
-  id_organizaciones: number;
+  id_organizacion: number;
 
-  @Column({ nullable: true })
-  id_evento: number;
+  @Column({type: String, nullable: false, length: 60 })
+  nombre_organizacion: string;
 
-  @Column({ nullable: true })
-  organizacion: string;
-
-  @Column({ nullable: true })
-  observacion: string;
-
-  @Column({ nullable: true })
-  fechareg_organizacion: string;
+  @Column({type: String, nullable: false, length: 300 })
+  observacion_organizacion: string;
 }
 
