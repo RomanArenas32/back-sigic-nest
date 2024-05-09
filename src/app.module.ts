@@ -24,6 +24,7 @@ import { EventosNovedadesModule } from './eventos-novedades/eventos-novedades.mo
 import { EventosPartidoAnalisisModule } from './eventos-partido-analisis/eventos-partido-analisis.module';
 import { Usuario } from './usuarios/entities/usuario.entity';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { Organizaciones } from './datos-organizaciones/entities/datos-organizacione.entity';
 
 
 @Module({
@@ -34,7 +35,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
     "username": "root",
     "password": "",
     "database": "sigic",
-    "entities": [Usuario], //["dist/**/*.entity{.ts,.js}"],
+    "entities": [Usuario, Organizaciones], //["dist/**/*.entity{.ts,.js}"],
     "synchronize": true
   }),UsuariosModule,  CategoriaDelegacionModule, CategoriaEventosModule, CategoriaJurisdiccionModule, CategoriaLugarModule, CategoriaOrganizacionesModule, CategoriaPersonasModule, CategoriaSubtipoEventoModule, DatosAmpliacionesModule, DatosDesarrolloModule, DatosFuncionarioModule, DatosLugarModule, DatosNovedadesModule, DatosOrganizacionesModule, DatosPersonasModule, EscuelasModule, EventosEventosModule, FuncionariosModule, NotificacionesModule, Notificaciones2Module, EventosNovedadesModule, EventosPartidoAnalisisModule, 
 ],

@@ -17,6 +17,11 @@ export class DatosOrganizacionesController {
     return this.datosOrganizacionesService.findAllOrganizaciones();
   }
 
+  @Get('/:nombre')
+  findOrganizacionByNombre(@Param('nombre') nombre: string) {
+    return this.datosOrganizacionesService.findOrganizacionByNombre(nombre);
+  }
+
   @Get('/:id')
   findOrganizacionById(@Param('id') id: number) {
     return this.datosOrganizacionesService.findOrganizacionById(id);

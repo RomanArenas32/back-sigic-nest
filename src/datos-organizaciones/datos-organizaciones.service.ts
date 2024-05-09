@@ -7,40 +7,44 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class DatosOrganizacionesService {
-
-
   constructor(
-    @InjectRepository(Organizaciones) private organizacionRepository: Repository<Organizaciones>,
+    @InjectRepository(Organizaciones)
+    private organizacionRepository: Repository<Organizaciones>,
   ) {}
 
   //CREAR ORGANIZACION
   async createOrganizacion(organizacionData: CreateDatosOrganizacioneDto) {
-  
-    const existe: CreateDatosOrganizacioneDto = await this.findOrganizacionById(
-      organizacionData.id_organizacion,
-    );
-    
-    if(existe){
-      throw new ConflictException("La organizacion ya esta registrada")
+    const existe: CreateDatosOrganizacioneDto =
+      await this.findOrganizacionByNombre(organizacionData.nombre_organizacion);
+
+    if (existe) {
+      throw new ConflictException(`La organizacion ${organizacionData.nombre_organizacion} ya esta registrada`);
     }
     const nuevaOrg = await this.organizacionRepository.save(organizacionData);
     const mensaje = 'Organizacion creada correctamente';
     return { organizacion: nuevaOrg, mensaje };
   }
 
-  findAllOrganizaciones() {
-    return `This action returns all datosOrganizaciones`;
+  async findAllOrganizaciones() {
+    return await this.organizacionRepository.find();
   }
-
+  //BUSCAR ORGANIZACION POR NOMBRE
+  async findOrganizacionByNombre(nombre: string) {
+    return await this.organizacionRepository.findOne({
+      where: { nombre_organizacion: nombre },
+    });
+  }
   //BUSCAR ORGANIZACION POR ID
   async findOrganizacionById(id: number) {
-
     return await this.organizacionRepository.findOne({
-      where: { id_organizacion : id },
+      where: { id_organizacion: id },
     });
   }
 
-  updateOrganizacion(id: number, updateDatosOrganizacioneDto: UpdateDatosOrganizacioneDto) {
+  updateOrganizacion(
+    id: number,
+    updateDatosOrganizacioneDto: UpdateDatosOrganizacioneDto,
+  ) {
     return `This action updates a #${id} datosOrganizacione`;
   }
 
