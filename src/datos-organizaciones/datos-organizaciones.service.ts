@@ -41,7 +41,7 @@ export class DatosOrganizacionesService {
     });
   }
 
-  updateOrganizacion(
+ async updateOrganizacion(
     id: number,
     updateDatosOrganizacioneDto: UpdateDatosOrganizacioneDto,
   ) {
