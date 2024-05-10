@@ -2,38 +2,39 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { DatosOrganizacionesService } from './datos-organizaciones.service';
 import { CreateDatosOrganizacioneDto } from './dto/create-datos-organizacione.dto';
 import { UpdateDatosOrganizacioneDto } from './dto/update-datos-organizacione.dto';
+import { Organizaciones } from './entities/datos-organizacione.entity';
 
 @Controller('api/v1/organizaciones')
 export class DatosOrganizacionesController {
-  constructor(private readonly datosOrganizacionesService: DatosOrganizacionesService) {}
+  constructor(private DatosOrganizacionesService: DatosOrganizacionesService) {}
 
   @Post()
   createOrganizacion(@Body() createDatosOrganizacioneDto: CreateDatosOrganizacioneDto) {
-    return this.datosOrganizacionesService.createOrganizacion(createDatosOrganizacioneDto);
+    return this.DatosOrganizacionesService.createOrganizacion(createDatosOrganizacioneDto);
   }
 
   @Get()
   findAllOrganizaciones() {
-    return this.datosOrganizacionesService.findAllOrganizaciones();
+    return this.DatosOrganizacionesService.findAllOrganizaciones();
   }
 
   @Get('/:nombre')
   findOrganizacionByNombre(@Param('nombre') nombre: string) {
-    return this.datosOrganizacionesService.findOrganizacionByNombre(nombre);
+    return this.DatosOrganizacionesService.findOrganizacionByNombre(nombre);
   }
 
-  @Get('/:id')
+  @Get('/obtener/:id')
   findOrganizacionById(@Param('id') id: number) {
-    return this.datosOrganizacionesService.findOrganizacionById(id);
+    return this.DatosOrganizacionesService.findOrganizacionById(id);
   }
 
   @Patch('/:id')
   updateOrganizacion(@Param('id') id: number, @Body() updateDatosOrganizacioneDto: UpdateDatosOrganizacioneDto) {
-    return this.datosOrganizacionesService.updateOrganizacion(id, updateDatosOrganizacioneDto);
+    return this.DatosOrganizacionesService.updateOrganizacion(id, updateDatosOrganizacioneDto);
   }
 
   @Delete('/:id')
   removeOrganizacion(@Param('id') id: number) {
-    return this.datosOrganizacionesService.removeOrganizacion(id);
+    return this.DatosOrganizacionesService.removeOrganizacion(id);
   }
 }
