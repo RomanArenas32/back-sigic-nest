@@ -25,7 +25,7 @@ export class UsuariosController {
     return this.UsuariosService.getUsuariosInactivos();
   }
 
-  @Patch()
+  @Patch('/edit')
   updateUser(@Body() usuario: UpdateUsuarioDto){
     return this.UsuariosService.updateUser(usuario);
   }

@@ -18,7 +18,9 @@ export class DatosOrganizacionesService {
       await this.findOrganizacionByNombre(organizacionData.nombre_organizacion);
 
     if (existe) {
-      throw new ConflictException(`La organizacion ${organizacionData.nombre_organizacion} ya esta registrada`);
+      throw new ConflictException(
+        `La organizacion ${organizacionData.nombre_organizacion} ya esta registrada`,
+      );
     }
     const nuevaOrg = await this.organizacionRepository.save(organizacionData);
     const mensaje = 'Organizacion creada correctamente';
@@ -41,11 +43,21 @@ export class DatosOrganizacionesService {
     });
   }
 
- async updateOrganizacion(
-    id: number,
-    updateDatosOrganizacioneDto: UpdateDatosOrganizacioneDto,
-  ) {
-    return `This action updates a #${id} datosOrganizacione`;
+  //actualizar ORGANIZACION
+  async updateOrganizacion(organizacion: UpdateDatosOrganizacioneDto) {
+    console.log(organizacion);
+    const existeOrg: UpdateDatosOrganizacioneDto =
+      await this.findOrganizacionByNombre(organizacion.nombre_organizacion);
+    console.log(existeOrg);
+    if (!existeOrg) {
+      throw new ConflictException(
+        `Error al intentar actualizar la organizacion.`,
+      );
+    }
+    await this.organizacionRepository.update(
+      { nombre_organizacion: organizacion.nombre_organizacion },
+      { ...organizacion },
+    );
   }
 
   removeOrganizacion(id: number) {

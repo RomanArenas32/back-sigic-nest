@@ -28,9 +28,9 @@ export class DatosOrganizacionesController {
     return this.DatosOrganizacionesService.findOrganizacionById(id);
   }
 
-  @Patch('/:id')
-  updateOrganizacion(@Param('id') id: number, @Body() updateDatosOrganizacioneDto: UpdateDatosOrganizacioneDto) {
-    return this.DatosOrganizacionesService.updateOrganizacion(id, updateDatosOrganizacioneDto);
+  @Patch('/edit')
+  updateOrganizacion(@Body() updateDatosOrganizacioneDto: UpdateDatosOrganizacioneDto) {
+    return this.DatosOrganizacionesService.updateOrganizacion(updateDatosOrganizacioneDto);
   }
 
   @Delete('/:id')
