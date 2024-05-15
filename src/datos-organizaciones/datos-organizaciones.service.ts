@@ -39,23 +39,21 @@ export class DatosOrganizacionesService {
   //BUSCAR ORGANIZACION POR ID
   async findOrganizacionById(id: number) {
     return await this.organizacionRepository.findOne({
-      where: { id_organizacion: id },
+      where: { id },
     });
   }
 
   //actualizar ORGANIZACION
   async updateOrganizacion(organizacion: UpdateDatosOrganizacioneDto) {
-    console.log(organizacion);
-    const existeOrg: UpdateDatosOrganizacioneDto =
-      await this.findOrganizacionByNombre(organizacion.nombre_organizacion);
-    console.log(existeOrg);
-    if (!existeOrg) {
+    const existeOrg: Organizaciones =
+      await this.findOrganizacionById(organizacion.id)
+      if (!existeOrg) {
       throw new ConflictException(
-        `Error al intentar actualizar la organizacion.`,
+        `Error al intentar actualizar la organizacion.!!`,
       );
     }
     await this.organizacionRepository.update(
-      { nombre_organizacion: organizacion.nombre_organizacion },
+      { id: organizacion.id },
       { ...organizacion },
     );
   }

@@ -6,7 +6,7 @@ export class CreateDatosOrganizacioneDto {
     @IsNumber()
     @IsPositive()
     @IsOptional()
-    id_organizacion?:number;
+    id?:number;
 
     @IsNotEmpty()
     @IsString()

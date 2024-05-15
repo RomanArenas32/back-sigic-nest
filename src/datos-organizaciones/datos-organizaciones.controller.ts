@@ -23,14 +23,14 @@ export class DatosOrganizacionesController {
     return this.DatosOrganizacionesService.findOrganizacionByNombre(nombre);
   }
 
-  @Get('/obtener/:id')
+  @Get('/selec/:id')
   findOrganizacionById(@Param('id') id: number) {
     return this.DatosOrganizacionesService.findOrganizacionById(id);
   }
 
   @Patch('/edit')
-  updateOrganizacion(@Body() updateDatosOrganizacioneDto: UpdateDatosOrganizacioneDto) {
-    return this.DatosOrganizacionesService.updateOrganizacion(updateDatosOrganizacioneDto);
+  updateOrganizacion(@Body() organizacion: UpdateDatosOrganizacioneDto) {
+    return this.DatosOrganizacionesService.updateOrganizacion(organizacion);
   }
 
   @Delete('/:id')
