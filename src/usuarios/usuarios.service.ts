@@ -36,7 +36,6 @@ export class UsuariosService {
   }
   //obtener usuarios inactivos
   async getUsuariosInactivos(){
-    console.log("first")
     return await this.usuarioRepository.find({
       where: {estado: false}
     })
