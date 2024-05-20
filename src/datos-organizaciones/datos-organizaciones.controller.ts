@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { DatosOrganizacionesService } from './datos-organizaciones.service';
 import { CreateDatosOrganizacioneDto } from './dto/create-datos-organizacione.dto';
 import { UpdateDatosOrganizacioneDto } from './dto/update-datos-organizacione.dto';
-import { Organizaciones } from './entities/datos-organizacione.entity';
 
 @Controller('api/v1/organizaciones')
 export class DatosOrganizacionesController {

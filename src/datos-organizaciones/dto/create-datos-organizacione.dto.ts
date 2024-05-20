@@ -15,5 +15,4 @@ export class CreateDatosOrganizacioneDto {
     @IsNotEmpty()
     @IsString()
     observacion_organizacion!: string;
-
 }

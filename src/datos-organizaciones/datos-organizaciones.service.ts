@@ -58,7 +58,14 @@ export class DatosOrganizacionesService {
     );
   }
 
-  removeOrganizacion(id: number) {
-    return `This action removes a #${id} datosOrganizacione`;
+  async removeOrganizacion(id: number) {
+    const organizacion = await this.findOrganizacionById(id);
+    if (!organizacion) {
+      throw new ConflictException(
+        `La organizacion con el ID ${id} no se encuentra`,
+      );
+    }
+    await this.organizacionRepository.remove(organizacion);
+    return { mensaje: `Organizacion eliminada correctamente` };
   }
 }
