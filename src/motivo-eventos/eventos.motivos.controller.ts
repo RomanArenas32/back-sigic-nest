@@ -17,14 +17,14 @@ export class EventosMotivosController {
     return this.eventosEventosService.findAllMotivos();
   }
 
-  @Get(':id')
+  @Get('/selec/:id')
   findMotivoById(@Param('id') id: string) {
     return this.eventosEventosService.findMotivoById(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventosEventoDto: UpdateMotivoEventoDto) {
-    return this.eventosEventosService.update(+id, updateEventosEventoDto);
+  @Patch('/edit')
+  updateMotivo(@Body() evento: UpdateMotivoEventoDto) {
+    return this.eventosEventosService.updateMotivo(evento);
   }
 
   @Delete(':id')

@@ -37,8 +37,23 @@ export class EventosMotivosService {
     });
   }
 
-  update(id: number, updateEventosEventoDto: UpdateMotivoEventoDto) {
-    return `This action updates a #${id} eventosEvento`;
+  //OBTENER MOTIVO POR NOMBRE
+  obtenerMotivoPorNombre(motivo: string){
+    return this.motivoEventosRepository.findOne({
+      where: {motivo}
+    })
+  }
+
+//ACTUALIZAR MOTIVO DE EVENTO
+  async updateMotivo(evento: UpdateMotivoEventoDto) {
+    const existeMotivo: UpdateMotivoEventoDto = await this.obtenerMotivoPorNombre(evento.motivo);
+    if (!existeMotivo) {
+      throw new ConflictException('El motivo de evento no esta registrado');
+    }
+    await this.motivoEventosRepository.update(
+      { motivo: evento.motivo }, 
+      { ...evento }, 
+    );
   }
 
   remove(id: number) {
