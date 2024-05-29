@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body,  Param, Delete, Put } from '@nestjs/common';
 import { EventosMotivosService } from './eventos.motivos.service';
 import { CreateMotivoEventoDto } from './dto/create-motivo.evento.dto';
 import { UpdateMotivoEventoDto } from './dto/update-motivo.evento.dto';
@@ -22,7 +22,7 @@ export class EventosMotivosController {
     return this.eventosEventosService.findMotivoById(+id);
   }
 
-  @Patch('/edit')
+  @Put('/edit')
   updateMotivo(@Body() evento: UpdateMotivoEventoDto) {
     return this.eventosEventosService.updateMotivo(evento);
   }

@@ -27,6 +27,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { Organizaciones } from './datos-organizaciones/entities/datos-organizacione.entity';
 import { EventosMotivosModule } from './motivo-eventos/motivos.eventos.module';
 import { MotivoEventos } from './motivo-eventos/entities/motivo.evento.entity';
+import { AuthModule } from './autenticacion/auth.module';
 
 
 @Module({
@@ -39,7 +40,7 @@ import { MotivoEventos } from './motivo-eventos/entities/motivo.evento.entity';
     "database": "sigic",
     "entities": [Usuario, Organizaciones, MotivoEventos], //["dist/**/*.entity{.ts,.js}"],
     "synchronize": true
-  }), EventosMotivosModule,UsuariosModule,  CategoriaDelegacionModule, CategoriaEventosModule, CategoriaJurisdiccionModule, CategoriaLugarModule, CategoriaOrganizacionesModule, CategoriaPersonasModule, CategoriaSubtipoEventoModule, DatosAmpliacionesModule, DatosDesarrolloModule, DatosFuncionarioModule, DatosLugarModule, DatosNovedadesModule, DatosOrganizacionesModule, DatosPersonasModule, EscuelasModule, EventosEventosModule, FuncionariosModule, NotificacionesModule, Notificaciones2Module, EventosNovedadesModule, EventosPartidoAnalisisModule, 
+  }), EventosMotivosModule,UsuariosModule, AuthModule,  CategoriaDelegacionModule, CategoriaEventosModule, CategoriaJurisdiccionModule, CategoriaLugarModule, CategoriaOrganizacionesModule, CategoriaPersonasModule, CategoriaSubtipoEventoModule, DatosAmpliacionesModule, DatosDesarrolloModule, DatosFuncionarioModule, DatosLugarModule, DatosNovedadesModule, DatosOrganizacionesModule, DatosPersonasModule, EscuelasModule, EventosEventosModule, FuncionariosModule, NotificacionesModule, Notificaciones2Module, EventosNovedadesModule, EventosPartidoAnalisisModule, 
 ],
   controllers: [],
   providers: [],

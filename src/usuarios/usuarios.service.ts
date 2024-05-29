@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Usuario } from './entities/usuario.entity';
 import { UpdateUsuarioDto } from './dto/update-usuario-dto';
+import { UpdatePassword } from './dto/updatePassword.dto';
 
 @Injectable()
 export class UsuariosService {
@@ -35,10 +36,10 @@ export class UsuariosService {
     });
   }
   //obtener usuarios inactivos
-  async getUsuariosInactivos(){
+  async getUsuariosInactivos() {
     return await this.usuarioRepository.find({
-      where: {estado: false}
-    })
+      where: { estado: false },
+    });
   }
 
   //actualizar  usuario
@@ -50,8 +51,21 @@ export class UsuariosService {
       throw new ConflictException('El usuario no existe');
     }
     await this.usuarioRepository.update(
-      { legajo: usuario.legajo }, 
-      { ...usuario }, 
+      { legajo: usuario.legajo },
+      { ...usuario },
+    );
+  }
+  //ACTUALIZAR CONTRASEÑA AL PRIMER INGRESO
+  async updatePassword(usuario: UpdatePassword) {
+    const existeUsuario = await this.findUsuarioByLegajo(
+      usuario.legajo,
+    );
+    if(!existeUsuario){
+      throw new ConflictException('El usuario no existe, por lo tanto no puede actualizarse');
+    }
+    await this.usuarioRepository.update(
+      { legajo: usuario.legajo },
+      { ...usuario },
     );
   }
 }

@@ -14,9 +14,10 @@ export class EventosMotivosService {
 
   //CREAR MTIVO DE EVENTO
   async createMotivo(dataEvento: CreateMotivoEventoDto) {
-    const existeMotivo: CreateMotivoEventoDto = await this.findMotivoById(
-      dataEvento.id,
+    const existeMotivo: CreateMotivoEventoDto = await this.obtenerMotivoPorNombre(
+      dataEvento.motivo,
     );
+    console.log(existeMotivo)
     if (existeMotivo) {
       throw new ConflictException('El motivo del evento ya esta registrado');
     }
@@ -29,6 +30,7 @@ export class EventosMotivosService {
   async findAllMotivos() {
     return await this.motivoEventosRepository.find();
   }
+
 
   //OBTENER MOTIVO EVENTO POR ID
   async findMotivoById(id: number) {
@@ -46,16 +48,18 @@ export class EventosMotivosService {
 
 //ACTUALIZAR MOTIVO DE EVENTO
   async updateMotivo(evento: UpdateMotivoEventoDto) {
-    const existeMotivo: UpdateMotivoEventoDto = await this.obtenerMotivoPorNombre(evento.motivo);
+    const existeMotivo: UpdateMotivoEventoDto = await this.findMotivoById(evento.id);
     if (!existeMotivo) {
       throw new ConflictException('El motivo de evento no esta registrado');
     }
     await this.motivoEventosRepository.update(
-      { motivo: evento.motivo }, 
+      { id: evento.id }, 
       { ...evento }, 
     );
   }
 
+
+  //ELIMINAR MOTIVO DEL EVENTO
   remove(id: number) {
     return `This action removes a #${id} eventosEvento`;
   }

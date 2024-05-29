@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario-dto';
+import { UpdatePassword } from './dto/updatePassword.dto';
 
 @Controller('api/v1/usuarios')
 export class UsuariosController {
@@ -28,5 +29,9 @@ export class UsuariosController {
   @Patch('/edit')
   updateUser(@Body() usuario: UpdateUsuarioDto){
     return this.UsuariosService.updateUser(usuario);
+  }
+  @Patch('/changepassword')
+  updatePassword(@Body() usuario: UpdatePassword){
+    return this.UsuariosService.updatePassword(usuario);
   }
 }
