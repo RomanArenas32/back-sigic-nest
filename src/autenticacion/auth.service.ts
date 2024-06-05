@@ -1,22 +1,30 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { LoginUser } from './dto/login-usuario-dto';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
+import * as bcrypt from 'bcryptjs';
 
-@Injectable()
 export class UsuariosService {
   constructor(
-    @InjectRepository(Usuario) private usuarioRepository: Repository<LoginUser>,
+    @InjectRepository(Usuario) private usuarioRepository: Repository<Usuario>
   ) {}
-  //Autenticar Usuario
+
+  // Autenticar Usuario
   async loginUser(usuario: LoginUser) {
-    const user = await this.usuarioRepository.findOne({where: {usuario : usuario.usuario}});
-    if(!user){
-      throw new ConflictException("Usuario y/o contraseña incorrectos")
+    const user = await this.usuarioRepository.findOne({ where: { usuario: usuario.usuario } });
+    if (!user) {
+      throw new ConflictException("Usuario y/o contraseña incorrectos");
     }
-    return user;
+    const passwordValid = await bcrypt.compare(usuario.password, user.password);
+    console.log(passwordValid)
+    if (!passwordValid) {
+      throw new ConflictException("Usuario y/o contraseña incorrectos");
+    }
+
+    return user
   }
+  
   /*
   async signIn(email: string, pass: string, rol: Role): Promise<{ access_token: string }> {
     //busca si los datos proporcionados coindicen con un usuario creado utilizando el email  
