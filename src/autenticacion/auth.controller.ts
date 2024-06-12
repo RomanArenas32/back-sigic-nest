@@ -1,6 +1,7 @@
-import { Body, Controller,  Post } from '@nestjs/common';
+import { Body, Controller,  Get,  Post, Request, UseGuards } from '@nestjs/common';
 import { UsuariosService } from './auth.service';
 import { LoginUser } from './dto/login-usuario-dto';
+import { AuthGuard } from './guard/auth.guard';
 
 @Controller('api/v1/authenticate')
 export class UsuariosController {
@@ -10,9 +11,10 @@ export class UsuariosController {
   loginUser(@Body() usuario: LoginUser) {
     return this.UsuariosService.loginUser(usuario);
   }
-  /*@Get('/:legajo')
-  getUserByLegajo(@Param('legajo') legajo: string) {
-    return this.UsuariosService.findUsuarioByLegajo(legajo);
-  }*/
+  @Get('/profile')
+  @UseGuards(AuthGuard)
+  getProfile(@Request() req: any) {
+    return this.UsuariosService.getProfile(req);
+  }
 
 }
