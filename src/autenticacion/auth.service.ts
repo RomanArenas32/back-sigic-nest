@@ -32,6 +32,7 @@ export class UsuariosService {
       delegacion: user.delegacion,
       usuario: user.usuario,
       rol: user.rol,
+      estado: user.estado
     };
 
     const token = await this.jwtService.signAsync(payload)

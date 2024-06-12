@@ -16,24 +16,14 @@ export class UsuariosService {
   async createUser(userData: CreateUsuarioDto) {
     console.log(userData)
     const existeUsuario: CreateUsuarioDto = await this.findUsuarioByLegajo(userData.legajo);
-  
     if (existeUsuario) {
       throw new ConflictException('El usuario ya existe');
     }
-  
-    // Generate a secure salt with a recommended cost factor (adjust as needed)
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
-  
-    // Hash the password using the generated salt
     const hashedPassword = await bcrypt.hash(userData.password, salt);
-  
-    // Update the userData object with the hashed password
     userData.password = hashedPassword;
-  
-    // Save the user with the hashed password
     const nuevoUsuario = await this.usuarioRepository.save(userData);
-  
     const mensaje = 'Usuario creado correctamente';
     return { usuario: nuevoUsuario, mensaje };
   }
@@ -78,8 +68,12 @@ export class UsuariosService {
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(usuario.password, salt);
-    usuario.password = hashedPassword;
-    await this.usuarioRepository.update({ legajo: usuario.legajo }, usuario);
+
+    // Actualizar la contraseña del usuario
+    await this.usuarioRepository.update(
+      { legajo: usuario.legajo },
+      { password: hashedPassword }
+    );
     return { mensaje: 'Contraseña actualizada correctamente' }; 
   }
 }
