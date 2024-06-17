@@ -17,7 +17,7 @@ export class Evento {
   @Column({ length: 200, nullable: false })
   antecedentes: string;
 
-  @Column({ type: 'longblob', nullable: true })
+  @Column({ type: 'blob', nullable: true })
   banner: Buffer;
 
   @Column({ length: 500, nullable: false })
@@ -26,7 +26,7 @@ export class Evento {
   @Column({ length: 500, nullable: false })
   organizacion: string;
 
-  @Column({ enum: ['Bajo', 'Medio', 'Alto'], nullable: false })
+  @Column({length: 100, nullable: false})
   nivel_conflictividad: string;
 }
 

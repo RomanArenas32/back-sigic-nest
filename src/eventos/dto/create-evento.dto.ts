@@ -1,44 +1,52 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { IsNumber, IsNotEmpty, IsString } from "class-validator";
 
-
+@Entity()
 export class CreateEventoDto {
-    // Se genera automaticamente desde la entity
-    @IsNumber() 
+    // Se genera automáticamente desde la entidad
+    @PrimaryGeneratedColumn()
+    @IsNumber()
     id?: number;
 
+    @Column()
     @IsNotEmpty() 
-    //Delegacion Azul
+    // Delegación Azul
     delegacion: string;
 
+    @Column()
     @IsNotEmpty() 
-    //Marcha por la aparicion con vida de mi perro
+    // Marcha por la aparición con vida de mi perro
     nombre_evento: string;
 
-    @IsNotEmpty() 
+    @Column()
+    @IsNotEmpty()
     @IsString()
-    //marcha
+    // marcha
     tipo_evento: string;
 
-    @IsNotEmpty() 
+    @Column()
+    @IsNotEmpty()
     @IsString()
-    //no hay - si hay cual?  //no es opsional
-    antecedentes:string;
+    // no hay - si hay cual?  //no es opcional
+    antecedentes: string;
 
-    //opcional
-    banner?:Buffer;
+    // opcional
+    @Column()
+    banner?: Buffer;
 
-    @IsNotEmpty() 
+    @Column()
+    @IsNotEmpty()
     @IsString()
-    //Familiares de un cachorro reclaman su aparicion con vida
+    // Familiares de un cachorro reclaman su aparición con vida
     extracto: string;
 
-    @IsNotEmpty() 
+    @Column()
+    @IsNotEmpty()
     @IsString()
-    //No hay - Cuales
+    // No hay - Cuáles
     organizacion: string;
 
-    @IsNotEmpty() 
-    @IsString()
-    // Bajo - Medio - Alto
+    @Column()
+    @IsNotEmpty()
     nivel_conflictividad: string;
 }
