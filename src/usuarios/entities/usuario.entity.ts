@@ -31,7 +31,8 @@ enum DELEGACIONES {
 }
 enum ROL {
     'USER_ROLE' = 'USER_ROLE',
-    "ADMIN_ROLE" = "ADMIN_ROLE"
+    "ADMIN_ROLE" = "ADMIN_ROLE",
+    "SUPERADMIN_ROLE" = "SUPERADMIN_ROLE"
 }
 
 @Entity()
