@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Evento } from "src/eventos/entities/evento.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 enum DELEGACIONES {
     "Delegacion Deparamental La Plata" = "Delegacion Deparamental La Plata",
     "Delegacion Deparamental Azul" = "Delegacion Deparamental Azul",
@@ -64,6 +65,9 @@ export class Usuario {
 
     @Column({ type: Boolean, nullable: false,  default: true })
     estado: boolean;
+
+    @OneToMany(() => Evento, evento => evento.usuario)
+    eventos?: Evento[];
 }
 
 

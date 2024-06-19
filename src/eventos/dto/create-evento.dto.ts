@@ -1,5 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { IsNumber, IsNotEmpty, IsString } from "class-validator";
+import { UpdateUsuarioDto } from 'src/usuarios/dto/update-usuario-dto';
+import { Type } from 'class-transformer';
 
 @Entity()
 export class CreateEventoDto {
@@ -8,45 +10,71 @@ export class CreateEventoDto {
     @IsNumber()
     id?: number;
 
-    @Column()
-    @IsNotEmpty() 
-    // Delegación Azul
-    delegacion: string;
-
-    @Column()
-    @IsNotEmpty() 
-    // Marcha por la aparición con vida de mi perro
-    nombre_evento: string;
-
-    @Column()
     @IsNotEmpty()
     @IsString()
-    // marcha
-    tipo_evento: string;
-
-    @Column()
+    responsable: string;
+  
     @IsNotEmpty()
     @IsString()
-    // no hay - si hay cual?  //no es opcional
-    antecedentes: string;
-
-    // opcional
-    @Column()
-    banner?: Buffer;
-
-    @Column()
+    partido: string;
+  
     @IsNotEmpty()
     @IsString()
-    // Familiares de un cachorro reclaman su aparición con vida
-    extracto: string;
-
-    @Column()
+    localidad: string;
+  
     @IsNotEmpty()
     @IsString()
-    // No hay - Cuáles
-    organizacion: string;
-
-    @Column()
+    fecha: Date;
+  
     @IsNotEmpty()
-    nivel_conflictividad: string;
+    @IsString()
+    hora: string;
+  
+    @IsNotEmpty()
+    @IsString()
+    tipo: string;
+  
+    @IsNotEmpty()
+    @IsString()
+    subtipo: string;
+  
+    @IsNotEmpty()
+    @IsString()
+    programacion: string;
+  
+    @IsNotEmpty()
+    @IsString()
+    coordenadas: string;
+
+    @IsNotEmpty()
+    @IsString()
+    baner: Buffer;
+  
+    @IsNotEmpty()
+    @IsString()
+    org: string[];
+  
+    @IsNotEmpty()
+    @IsString()
+    infoDelegacion: string;
+  
+    @IsNotEmpty()
+    @IsString()
+    infoReunion: string;
+  
+    @IsNotEmpty()
+    @IsString()
+    extracto: string;  
+
+    @IsNotEmpty()
+    @IsString()
+    lugar: string; 
+
+    @IsNotEmpty()
+    @IsString()
+    barrio: string; 
+
+    @Type(()=> UpdateUsuarioDto)
+    @IsNotEmpty()
+    usuario!: UpdateUsuarioDto;
 }

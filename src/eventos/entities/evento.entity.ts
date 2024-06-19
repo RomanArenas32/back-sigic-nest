@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Usuario } from 'src/usuarios/entities/usuario.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Evento {
@@ -29,7 +30,10 @@ export class Evento {
   @Column({ length: 500, nullable: false }) // ev. programado, no programado etc
   programacion: string;
 
-  @Column({ type: 'bytea', nullable: true }) 
+  @Column({ length: 150, nullable: false })
+  coordenadas: string;
+
+  @Column({ type: 'blob', nullable: true }) 
   baner: Buffer;
 
   @Column({ type: 'simple-array', nullable: false, default: "Ciudadania en general" })
@@ -43,6 +47,15 @@ export class Evento {
 
   @Column({ length: 500, nullable: false })
   extracto: string;
+
+  @Column({ length: 500, nullable: false })
+  lugar: string;
+
+  @Column({ length: 500, nullable: false })
+  barrio: string;
+
+  @ManyToOne(() => Usuario, usuario => usuario.eventos)
+  usuario!: Usuario;
 }
 
 

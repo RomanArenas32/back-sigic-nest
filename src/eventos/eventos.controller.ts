@@ -3,13 +3,13 @@ import { EventosService } from './eventos.service';
 import { CreateEventoDto } from './dto/create-evento.dto';
 import { UpdateEventoDto } from './dto/update-evento.dto';
 
-@Controller('api/v2/eventos')
+@Controller('api/v1/eventos')
 export class EventosController {
   constructor(private readonly eventosService: EventosService) {}
 
   @Post()
-  create(@Body() createEventoDto: CreateEventoDto) {
-    return this.eventosService.create(createEventoDto);
+  create(@Body() evento: CreateEventoDto) {
+    return this.eventosService.createEvento(evento);
   }
 
   @Get()
