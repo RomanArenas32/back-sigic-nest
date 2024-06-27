@@ -13,8 +13,8 @@ export class EventosController {
   }
 
   @Get()
-  findAll() {
-    return this.eventosService.findAll();
+  listarTodosLosEv() {
+    return this.eventosService.listarTodosLosEv();
   }
 
   @Get(':id')

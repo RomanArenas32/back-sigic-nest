@@ -33,10 +33,14 @@ export class Evento {
   @Column({ length: 150, nullable: false })
   coordenadas: string;
 
-  @Column({ type: 'blob', nullable: true }) 
+  @Column({ type: 'blob', nullable: true })
   baner: Buffer;
 
-  @Column({ type: 'simple-array', nullable: false, default: "Ciudadania en general" })
+  @Column({
+    type: 'simple-array',
+    nullable: false,
+    default: 'Ciudadania en general',
+  })
   org: string[];
 
   @Column({ length: 500, nullable: false })
@@ -54,9 +58,6 @@ export class Evento {
   @Column({ length: 500, nullable: false })
   barrio: string;
 
-  @ManyToOne(() => Usuario, usuario => usuario.eventos)
+  @ManyToOne(() => Usuario, (usuario) => usuario.eventos)
   usuario!: Usuario;
 }
-
-
-

@@ -24,8 +24,15 @@ export class EventosService {
     }
   }
 
-  findAll() {
-    return `This action returns all eventos`;
+  async listarTodosLosEv() {
+    try {
+      const eventos = await this.eventoRepository.find();
+      const mensaje = 'Eventos obtenidos con exito';
+      return { eventos, mensaje };
+    } catch (error) {
+      console.log(error);
+      throw new ConflictException('Error al obtener todos los eventos');
+    }
   }
 
   findOne(id: number) {

@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { IsNumber, IsNotEmpty, IsString } from "class-validator";
+import { Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { IsNumber, IsNotEmpty, IsString } from 'class-validator';
 import { UpdateUsuarioDto } from 'src/usuarios/dto/update-usuario-dto';
 import { Type } from 'class-transformer';
 
@@ -60,7 +60,7 @@ export class CreateEventoDto {
   
     @IsNotEmpty()
     @IsString()
-    infoReunion: string;
+  infoReunion: string;
   
     @IsNotEmpty()
     @IsString()
