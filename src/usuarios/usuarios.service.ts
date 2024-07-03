@@ -14,18 +14,24 @@ export class UsuariosService {
   ) {}
   //Crear usuario
   async createUser(userData: CreateUsuarioDto) {
-    console.log(userData)
-    const existeUsuario: CreateUsuarioDto = await this.findUsuarioByLegajo(userData.legajo);
+    const existeUsuario: CreateUsuarioDto = await this.findUsuarioByLegajo(
+      userData.legajo,
+    );
     if (existeUsuario) {
       throw new ConflictException('El usuario ya existe');
     }
-    const saltRounds = 10;
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hashedPassword = await bcrypt.hash(userData.password, salt);
-    userData.password = hashedPassword;
-    const nuevoUsuario = await this.usuarioRepository.save(userData);
-    const mensaje = 'Usuario creado correctamente';
-    return { usuario: nuevoUsuario, mensaje };
+    try {
+      const saltRounds = 10;
+      const salt = await bcrypt.genSalt(saltRounds);
+      const hashedPassword = await bcrypt.hash(userData.password, salt);
+      userData.password = hashedPassword;
+      const nuevoUsuario = await this.usuarioRepository.save(userData);
+      const mensaje = 'Usuario creado correctamente';
+      return { usuario: nuevoUsuario, mensaje };
+    } catch (error) {
+      console.log(error);
+      throw new ConflictException('Error al crear un usuario');
+    }
   }
   //Buscar Usuario por legajo
   async findUsuarioByLegajo(legajo: string) {
@@ -51,29 +57,44 @@ export class UsuariosService {
     const existeUsuario: UpdateUsuarioDto = await this.findUsuarioByLegajo(
       usuario.legajo,
     );
+    console.log(existeUsuario);
     if (!existeUsuario) {
       throw new ConflictException('El usuario no existe');
     }
-    await this.usuarioRepository.update(
-      { legajo: usuario.legajo },
-      { ...usuario },
-    );
+    try {
+      const mensaje: string = 'Actualizado correctamente';
+      const usuarioActualizado = await this.usuarioRepository.update(
+        { legajo: usuario.legajo },
+        { ...usuario },
+      );
+      return { mensaje, usuarioActualizado };
+    } catch (error) {
+      console.log(error);
+      throw new ConflictException('No se pudo actualizar el usuario');
+    }
   }
   //ACTUALIZAR CONTRASEÑA AL PRIMER INGRESO
   async updatePassword(usuario: UpdatePassword) {
     const existeUsuario = await this.findUsuarioByLegajo(usuario.legajo);
     if (!existeUsuario) {
-      throw new ConflictException('El usuario no existe, por lo tanto no puede actualizarse');
+      throw new ConflictException(
+        'El usuario no existe, por lo tanto no puede actualizarse',
+      );
     }
-    const saltRounds = 10;
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hashedPassword = await bcrypt.hash(usuario.password, salt);
+    try {
+      const saltRounds = 10;
+      const salt = await bcrypt.genSalt(saltRounds);
+      const hashedPassword = await bcrypt.hash(usuario.password, salt);
 
-    // Actualizar la contraseña del usuario
-    await this.usuarioRepository.update(
-      { legajo: usuario.legajo },
-      { password: hashedPassword }
-    );
-    return { mensaje: 'Contraseña actualizada correctamente' }; 
+      // Actualizar la contraseña del usuario
+      await this.usuarioRepository.update(
+        { legajo: usuario.legajo },
+        { password: hashedPassword },
+      );
+    } catch (error) {
+      console.log(error);
+      throw new ConflictException('La contraseña no puede actualizarse');
+    }
+    return { mensaje: 'Contraseña actualizada correctamente' };
   }
 }
